@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import PokemonsList from "../components/PokemonsList/PokemonsList";
-import LoadingSpinner from "./LoadingSpinner/LoadingSpinner";
-import Pagination from "./Pagination/Pagination";
-import Error from "./Error/Error";
-import Navbar from "./Navbar/Navbar";
-import { getPokemons, searchPokemons } from "../api/requests";
+import React, { Component } from 'react';
+import PokemonsList from '../components/PokemonsList/PokemonsList';
+import LoadingSpinner from './LoadingSpinner/LoadingSpinner';
+import Pagination from './Pagination/Pagination';
+import Error from './Error/Error';
+import Navbar from './Navbar/Navbar';
+import { getPokemons, searchPokemons } from '../api/requests';
 
 class App extends Component {
   state = {
@@ -12,7 +12,7 @@ class App extends Component {
     isLoading: true,
     isError: false,
     totalCount: null,
-    searchText: "",
+    searchText: '',
     currentPage: 1,
     limit: 20
   };
@@ -90,7 +90,7 @@ class App extends Component {
     if (isError) {
       return (
         <div className="container mt-5">
-          <Error handleClickFn={this.handleClick} />
+          <Error />
         </div>
       );
     }
@@ -104,22 +104,22 @@ class App extends Component {
               <LoadingSpinner />
             </div>
           ) : (
-            <>
-              {!parseInt(totalCount) ? (
-                <p>No results</p>
-              ) : (
-                <PokemonsList pokemons={pokemons} />
-              )}
-              {parseInt(totalCount) > 0 && (
-                <Pagination
-                  totalCount={totalCount}
-                  limit={limit}
-                  currentPage={currentPage}
-                  handleClickFn={this.handleClick}
-                />
-              )}
-            </>
-          )}
+              <>
+                {!totalCount ? (
+                  <p>No results</p>
+                ) : (
+                    <PokemonsList pokemons={pokemons} />
+                  )}
+                {totalCount > 0 && (
+                  <Pagination
+                    totalCount={totalCount}
+                    limit={limit}
+                    currentPage={currentPage}
+                    handleClickFn={this.handleClick}
+                  />
+                )}
+              </>
+            )}
         </div>
       </>
     );

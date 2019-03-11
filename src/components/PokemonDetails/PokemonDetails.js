@@ -1,8 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
-import PokemonType from "../PokemonType/PokemonType";
-// import PokemonEvolution from "../PokemonEvolution/PokemonEvolution";
-import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
+import React from 'react';
+import PropTypes from 'prop-types';
+import PokemonType from '../PokemonType/PokemonType';
+// import PokemonEvolution from '../PokemonEvolution/PokemonEvolution';
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 
 const PokemonDetails = ({ pokemon, isLoading }) => {
   const renderBody = () => {
@@ -83,8 +83,8 @@ const PokemonDetails = ({ pokemon, isLoading }) => {
                 <LoadingSpinner />
               </div>
             ) : (
-              renderBody()
-            )}
+                renderBody()
+              )}
           </div>
         </div>
       </div>

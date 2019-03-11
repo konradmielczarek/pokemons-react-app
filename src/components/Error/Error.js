@@ -1,16 +1,16 @@
-import React from "react";
+import React from 'react';
 
-const Error = ({ handleClickFn }) => {
+const Error = () => {
   return (
     <div className="alert alert-danger d-flex align-items-center" role="alert">
       Error occurred. Try to
-      <span
+      <a
+        href="/"
         className="btn btn-danger btn-sm ml-2"
         role="button"
-        onClick={handleClickFn}
       >
         refresh
-      </span>
+      </a>
     </div>
   );
 };

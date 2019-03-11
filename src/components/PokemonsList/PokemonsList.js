@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import PokemonItem from "../PokemonItem/PokemonItem";
-import PokemonDetails from "../PokemonDetails/PokemonDetails";
-import { getPokemon } from "../../api/requests";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import PokemonItem from '../PokemonItem/PokemonItem';
+import PokemonDetails from '../PokemonDetails/PokemonDetails';
+import { getPokemon } from '../../api/requests';
 
 class PokemonsList extends Component {
   state = {
-    selectedPokemonId: "",
+    selectedPokemonId: '',
     selectedPokemonData: {},
     isLoading: true
   };

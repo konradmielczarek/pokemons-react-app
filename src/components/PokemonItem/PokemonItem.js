@@ -1,6 +1,6 @@
-import React from "react";
-import PropTypes from "prop-types";
-import PokemonType from "../PokemonType/PokemonType";
+import React from 'react';
+import PropTypes from 'prop-types';
+import PokemonType from '../PokemonType/PokemonType';
 
 const PokemonItem = ({ onClick, name, image, types, num, id }) => {
   return (

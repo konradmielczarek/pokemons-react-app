@@ -9,7 +9,7 @@ export const getPokemons = async (limit, page = 1) => {
 
   return {
     data: result.data,
-    totalCount: result.headers["x-total-count"]
+    totalCount: parseInt(result.headers["x-total-count"]),
   };
 };
 
@@ -26,6 +26,6 @@ export const searchPokemons = async (text, limit, page = 1) => {
 
   return {
     data: result.data,
-    totalCount: result.headers["x-total-count"]
+    totalCount: parseInt(result.headers["x-total-count"]),
   };
 };

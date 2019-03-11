@@ -1,5 +1,6 @@
-import React from "react";
-import logoImage from "../../assets/images/pokemon-logo.svg.png";
+import React from 'react';
+import logoImage from '../../assets/images/pokemon-logo.svg.png';
+import PropTypes from 'prop-types';
 
 const Navbar = ({ handleSearchFn }) => {
   return (
@@ -29,5 +30,9 @@ const Navbar = ({ handleSearchFn }) => {
     </nav>
   );
 };
+
+Navbar.propTypes = {
+  handleSearchFn: PropTypes.func.isRequired,
+}
 
 export default Navbar;
