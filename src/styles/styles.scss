@@ -1,0 +1,9 @@
+@import '../components/PokemonItem/PokemonItem.scss';
+@import '../components/PokemonType/PokemonType.scss';
+@import '../components/LoadingSpinner/LoadingSpinner.scss';
+@import '../components/Navbar/Navbar.scss';
+
+.main-spinner-wrapper {
+  width: 100%;
+  text-align: center;
+}
