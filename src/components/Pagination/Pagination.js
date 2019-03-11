@@ -24,7 +24,7 @@ const Pagination = ({ handleClickFn, totalCount, limit, currentPage }) => {
 
   return (
     <nav className="mt-2 mb-5" aria-label="...">
-      <ul className="pagination pagination">{renderPages(numberOfPages)}</ul>
+      <ul className="pagination">{renderPages(numberOfPages)}</ul>
     </nav>
   );
 };
