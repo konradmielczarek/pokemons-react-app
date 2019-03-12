@@ -1,8 +1,9 @@
 import React from 'react';
+import { Alert } from 'reactstrap';
 
 const Error = () => {
   return (
-    <div className="alert alert-danger d-flex align-items-center" role="alert">
+    <Alert color="danger" className="d-flex align-items-center">
       Error occurred. Try to
       <a
         href="/"
@@ -11,7 +12,7 @@ const Error = () => {
       >
         refresh
       </a>
-    </div>
+    </Alert>
   );
 };
 

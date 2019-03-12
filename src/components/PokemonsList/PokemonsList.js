@@ -1,66 +1,58 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import PokemonItem from '../PokemonItem/PokemonItem';
-import PokemonDetails from '../PokemonDetails/PokemonDetails';
-import { getPokemon } from '../../api/requests';
+import PokemonType from '../PokemonType/PokemonType';
+import PokemonModal from '../PokemonDetails/PokemonModal';
+import { Row, Col, Card, CardImg, CardBody, CardTitle } from 'reactstrap';
 
 class PokemonsList extends Component {
-  state = {
-    selectedPokemonId: '',
-    selectedPokemonData: {},
-    isLoading: true
-  };
+  constructor(props) {
+    super(props);
 
-  /*
-    Make API get request to retrieve
-    the specific pokemon's data with given id
-  */
+    this.state = {
+      selectedPokemonData: {},
+      isPokemonModalOpen: false,
+    };
+  }
 
-  retrievePokemonData = async id => {
-    this.setState({ isLoading: true });
-
-    try {
-      const result = await getPokemon(id);
-
-      this.setState({ selectedPokemonData: result, isLoading: false });
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
-  /*
-    Get pokemon id from event
-    Pass the id to component's state
-    Call the function making API get request
-  */
-
-  getPokemonId = e => {
-    const pokemonId = e.currentTarget.id;
-
-    this.setState({ selectedPokemonId: pokemonId });
-    this.retrievePokemonData(pokemonId);
-  };
+  togglePokemonModal = () => {
+    this.setState(({ isPokemonModalOpen: !this.state.isPokemonModalOpen }));
+  }
 
   render() {
     const { pokemons } = this.props;
-    const { selectedPokemonData, isLoading } = this.state;
+    const { selectedPokemonData, isLoading, isPokemonModalOpen } = this.state;
 
     return (
       <>
-        <PokemonDetails pokemon={selectedPokemonData} isLoading={isLoading} />
-        <div className="row">
+        <PokemonModal
+          pokemon={selectedPokemonData}
+          isLoading={isLoading}
+          isPokemonModalOpen={isPokemonModalOpen}
+          toggle={this.togglePokemonModal}
+        />
+        <Row>
           {pokemons.map(pokemon => (
-            <PokemonItem
-              onClick={this.getPokemonId}
-              key={pokemon.id}
-              name={pokemon.name}
-              image={pokemon.img}
-              types={pokemon.type}
-              num={pokemon.num}
-              id={pokemon.id}
-            />
+            <Col sm="6" md="4" lg="3" className="mb-4" key={pokemon.id}>
+              <Card className="card pokemon-item" onClick={() => { this.togglePokemonModal(); this.setState({ selectedPokemonData: pokemon }); }}>
+                <CardImg
+                  className="pokemon-image align-self-center"
+                  src={pokemon.img}
+                  alt="pokemon"
+                />
+                <CardBody>
+                  <CardTitle className="text-center text-truncate">
+                    <h5>{`#${pokemon.num} ${pokemon.name}`}</h5>
+                  </CardTitle>
+                  <ul className="list-unstyled d-flex justify-content-center">
+                    {pokemon.type.map((el, i) => (
+                      <PokemonType key={i} type={el} />
+                    ))}
+                  </ul>
+                </CardBody>
+              </Card>
+            </Col>
           ))}
-        </div>
+        </Row>
       </>
     );
   }

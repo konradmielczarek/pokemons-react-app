@@ -1,13 +1,10 @@
 import React from 'react';
+import { Spinner } from 'reactstrap';
+
 
 const LoadingSpinner = () => {
   return (
-    <div className="lds-ring">
-      <div />
-      <div />
-      <div />
-      <div />
-    </div>
+    <Spinner style={{ width: '3rem', height: '3rem' }} />
   );
 };
 

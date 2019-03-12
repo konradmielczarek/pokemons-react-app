@@ -1,7 +1,7 @@
-@import '../components/PokemonItem/PokemonItem.scss';
+@import '../components/PokemonsList/PokemonsList.scss';
 @import '../components/PokemonType/PokemonType.scss';
-@import '../components/LoadingSpinner/LoadingSpinner.scss';
 @import '../components/Navbar/Navbar.scss';
+@import '~bootstrap/dist/css/bootstrap.min.css';
 
 .main-spinner-wrapper {
   width: 100%;
