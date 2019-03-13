@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types';
 import PokemonType from '../../PokemonType/PokemonType';
+
 import { Container, Row, Col } from 'reactstrap';
 
 const PokemonModalBody = ({ pokemon }) => {
@@ -53,7 +54,6 @@ const PokemonModalBody = ({ pokemon }) => {
           </Col>
         </Row>
       ) : null}
-      {/* <div className="row">{renderEvolutions()}</div> */}
     </Container>
   )
 }

@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import PokemonType from '../PokemonType/PokemonType';
 import PokemonModal from '../PokemonDetails/PokemonModal';
+
 import { Row, Col, Card, CardImg, CardBody, CardTitle } from 'reactstrap';
+
+import { inject, observer } from 'mobx-react';
 
 class PokemonsList extends Component {
   constructor(props) {
@@ -19,14 +21,13 @@ class PokemonsList extends Component {
   }
 
   render() {
-    const { pokemons } = this.props;
-    const { selectedPokemonData, isLoading, isPokemonModalOpen } = this.state;
+    const { pokemons } = this.props.store.appStore;
+    const { selectedPokemonData, isPokemonModalOpen } = this.state;
 
     return (
       <>
         <PokemonModal
           pokemon={selectedPokemonData}
-          isLoading={isLoading}
           isPokemonModalOpen={isPokemonModalOpen}
           toggle={this.togglePokemonModal}
         />
@@ -58,8 +59,4 @@ class PokemonsList extends Component {
   }
 }
 
-PokemonsList.propTypes = {
-  pokemons: PropTypes.array.isRequired
-};
-
-export default PokemonsList;
+export default inject('store')(observer(PokemonsList));

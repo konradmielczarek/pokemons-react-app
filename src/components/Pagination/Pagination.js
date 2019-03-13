@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 
 const PaginationComponent = ({ handleClickFn, totalCount, limit, currentPage }) => {

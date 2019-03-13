@@ -1,6 +1,7 @@
 import React from 'react';
 import logoImage from '../../assets/images/pokemon-logo.svg.png';
 import PropTypes from 'prop-types';
+
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Form, Input } from 'reactstrap';
 
 class NavBar extends React.Component {

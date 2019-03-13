@@ -8,7 +8,7 @@ const PokemonType = ({ type }) => {
 };
 
 PokemonType.propTypes = {
-  type: PropTypes.string.isRequired
+  type: PropTypes.string.isRequired,
 };
 
 export default PokemonType;
