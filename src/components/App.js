@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PokemonsList from '../components/PokemonsList/PokemonsList';
+import PokemonsList from './PokemonsList/PokemonsList';
 import LoadingSpinner from './LoadingSpinner/LoadingSpinner';
 import Pagination from './Pagination/Pagination';
 import Error from './Error/Error';
@@ -22,7 +22,7 @@ class App extends Component {
   async componentDidMount() {
     const { appStore } = this.props.store;
 
-    await appStore.getPokemons(appStore.limit, 1);
+    await appStore.getPokemons(this.state.limit, 1);
 
     appStore.setIsLoading(false);
   }
