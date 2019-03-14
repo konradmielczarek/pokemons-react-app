@@ -1,5 +1,5 @@
 import axios from "axios";
-import { decorate, observable } from 'mobx';
+import { decorate, observable, action } from 'mobx';
 
 const baseURL = "http://localhost:4000";
 
@@ -13,7 +13,7 @@ export default class AppStore {
   getPokemons = async (limit, page = 1, searchTxt = '', filter = '') => {
     try {
       const result = await axios.get(
-        `${baseURL}/pokemon?_page=${page}&_limit=${limit}&name_like=${searchTxt}&type_like${filter}`
+        `${baseURL}/pokemon?_page=${page}&_limit=${limit}&name_like=${searchTxt}&type_like=${filter}`
       );
 
       this.pokemons = result.data;
@@ -41,4 +41,6 @@ decorate(AppStore, {
   isError: observable,
   isLoading: observable,
   searchText: observable,
+  setSearchText: action,
+  setIsLoading: action
 });
