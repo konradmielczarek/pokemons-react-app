@@ -8,7 +8,7 @@ import './styles/styles.scss';
 import { Provider } from 'mobx-react';
 
 const store = {
-  appStore: new AppStore(),
+  appStore: new AppStore()
 }
 
 ReactDOM.render(

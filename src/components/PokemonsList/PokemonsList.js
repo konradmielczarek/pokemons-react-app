@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PokemonType from '../PokemonType/PokemonType';
-import PokemonModal from '../PokemonDetails/PokemonModal';
+import CustomModal from '../CustomModal/CustomModal';
+import PokemonModalBody from '../CustomModal/ModalsBodies/PokemonModalBody';
 
 import { Row, Col, Card, CardImg, CardBody, CardTitle } from 'reactstrap';
 
@@ -11,7 +12,7 @@ class PokemonsList extends Component {
     super(props);
 
     this.state = {
-      selectedPokemonData: {},
+      pokemonData: {},
       isPokemonModalOpen: false,
     };
   }
@@ -22,19 +23,20 @@ class PokemonsList extends Component {
 
   render() {
     const { pokemons } = this.props.store.appStore;
-    const { selectedPokemonData, isPokemonModalOpen } = this.state;
+    const { pokemonData, isPokemonModalOpen } = this.state;
 
     return (
       <>
-        <PokemonModal
-          pokemon={selectedPokemonData}
+        <CustomModal
+          header={`#${pokemonData.num} ${pokemonData.name}`}
+          body={<PokemonModalBody pokemon={pokemonData} />}
           isPokemonModalOpen={isPokemonModalOpen}
           toggle={this.togglePokemonModal}
         />
         <Row>
           {pokemons.map(pokemon => (
             <Col sm="6" md="4" lg="3" className="mb-4" key={pokemon.id}>
-              <Card className="card pokemon-item" onClick={() => { this.togglePokemonModal(); this.setState({ selectedPokemonData: pokemon }); }}>
+              <Card className="card pokemon-item" onClick={() => { this.togglePokemonModal(); this.setState({ pokemonData: pokemon }); }}>
                 <CardImg
                   className="pokemon-image align-self-center"
                   src={pokemon.img}
