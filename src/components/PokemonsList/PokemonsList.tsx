@@ -13,7 +13,8 @@ import { inject, observer } from 'mobx-react';
 
 // TYPES
 import { IAppStore } from '../../stores/AppStore';
-import { Pokemon } from '../../types/pokemonType';
+import { Pokemon } from '../../types/pokemon';
+import { TypeBadge } from '../../types/typeBadge';
 
 interface IProps {
   appStore?: IAppStore
@@ -60,7 +61,7 @@ class PokemonsList extends Component<IProps, IState> {
                     <h5>{`#${pokemon.num} ${pokemon.name}`}</h5>
                   </CardTitle>
                   <ul className="list-unstyled d-flex justify-content-center">
-                    {pokemon.type!.map((el: string, i: number) => (
+                    {pokemon.type!.map((el: TypeBadge, i: number) => (
                       <PokemonType key={i} type={el} />
                     ))}
                   </ul>

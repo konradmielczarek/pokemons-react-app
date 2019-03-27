@@ -7,7 +7,8 @@ import PokemonType from '../../PokemonType/PokemonType';
 import { Container, Row, Col } from 'reactstrap';
 
 // TYPES
-import { Pokemon } from '../../../types/pokemonType';
+import { Pokemon } from '../../../types/pokemon';
+import { TypeBadge } from '../../../types/typeBadge';
 
 interface IProps {
   pokemon: Pokemon
@@ -27,7 +28,7 @@ const PokemonModalBody: React.FC<IProps> = ({ pokemon }) => {
         <Col xs="6">
           <h6>Type</h6>
           <ul className="list-unstyled d-flex justify-content-start flex-wrap m-0">
-            {pokemon.type.map((el: string, i: number) => (
+            {pokemon.type.map((el: TypeBadge, i: number) => (
               <PokemonType key={i} type={el} />
             ))}
           </ul>
@@ -35,7 +36,7 @@ const PokemonModalBody: React.FC<IProps> = ({ pokemon }) => {
         <Col xs="6">
           <h6>Weaknesses</h6>
           <ul className="list-unstyled d-flex justify-content-start flex-wrap m-0">
-            {pokemon.weaknesses.map((el: string, i: number) => (
+            {pokemon.weaknesses.map((el: TypeBadge, i: number) => (
               <PokemonType key={i} type={el} />
             ))}
           </ul>

@@ -1,3 +1,5 @@
+import { TypeBadge } from "./typeBadge";
+
 type PrevEvolution = {
   num: string,
   name: string
@@ -13,7 +15,7 @@ export type Pokemon = {
   num: string,
   name: string,
   img: string,
-  type: string[],
+  type: TypeBadge[],
   height: string,
   weight: string,
   candy: string,
@@ -23,7 +25,7 @@ export type Pokemon = {
   avg_spawns: number,
   spawn_time: string,
   multipliers: number[],
-  weaknesses: string[],
+  weaknesses: TypeBadge[],
   prev_evolution: PrevEvolution[],
   next_evolution: NextEvolution[]
 }

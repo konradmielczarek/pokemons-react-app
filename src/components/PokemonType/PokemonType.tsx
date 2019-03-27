@@ -1,7 +1,10 @@
 import React from 'react';
 
+// TYPES
+import { TypeBadge } from '../../types/typeBadge';
+
 interface IProps {
-  type: string
+  type: TypeBadge
 }
 
 const PokemonType: React.FC<IProps> = ({ type }) => {

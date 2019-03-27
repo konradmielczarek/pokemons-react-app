@@ -3,7 +3,7 @@ import baseURL from '../utils/baseURL';
 
 import { decorate, observable, action } from 'mobx';
 
-import { Pokemon } from '../types/pokemonType';
+import { Pokemon } from '../types/pokemon';
 
 export interface IAppStore {
   pokemons: Pokemon[];
