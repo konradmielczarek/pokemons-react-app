@@ -38,7 +38,7 @@ export class AppStore implements IAppStore {
   public currentPage: number = 1;
   public limit: number = 20;
 
-  getPokemons = async (limit: number, page: number = 1, searchTxt: string = '', orderBy: string = ''): Promise<void> => {
+  getPokemons = async (limit: number, page: number = 1, searchTxt: string = '', orderBy: string = '') => {
     try {
       const result = await axios.get(
         `${baseURL}/pokemon?_page=${page}&_limit=${limit}&name_like=${searchTxt}&_sort=${orderBy}&_order=asc`

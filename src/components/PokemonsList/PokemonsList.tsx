@@ -1,73 +1,69 @@
 import React, { Component } from 'react';
 
 // COMPONENTS
-import PokemonType from '../PokemonType/PokemonType';
+import PokemonItem from '../PokemonItem/PokemonItem';
 import CustomModal from '../CustomModal/CustomModal';
 import PokemonModalBody from '../CustomModal/ModalsBodies/PokemonModalBody';
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 
 // REACTSTRAP
-import { Row, Col, Card, CardImg, CardBody, CardTitle } from 'reactstrap';
+import { Row } from 'reactstrap';
 
 // MOBX
 import { inject, observer } from 'mobx-react';
 
 // TYPES
 import { IAppStore } from '../../stores/AppStore';
-import { Pokemon } from '../../types/pokemon';
-import { TypeBadge } from '../../types/typeBadge';
+import { IPokemonItemStore } from '../../stores/PokemonItemStore';
 
 interface IProps {
-  appStore?: IAppStore
+  appStore?: IAppStore,
+  pokemonItemStore?: IPokemonItemStore
 }
 
 interface IState {
-  pokemonData: Pokemon,
   isPokemonModalOpen: boolean
 }
 
 class PokemonsList extends Component<IProps, IState> {
   state = {
-    pokemonData: {} as Pokemon,
     isPokemonModalOpen: false
   };
 
-  togglePokemonModal = (): void => {
-    this.setState(({ isPokemonModalOpen: !this.state.isPokemonModalOpen }));
-  }
+  togglePokemonModal = () => this.setState(
+    prevState => ({ isPokemonModalOpen: !prevState.isPokemonModalOpen })
+  );
+
+  getPokemonOnClick = (e: React.MouseEvent<HTMLElement>) => {
+    const { pokemonItemStore } = this.props;
+    const id: number = parseInt(e.currentTarget.dataset.id!);
+
+    pokemonItemStore!.setPokemonId(id);
+  };
 
   render() {
     const { pokemons } = this.props.appStore!;
-    const { pokemonData, isPokemonModalOpen } = this.state;
+    const { isPokemonModalOpen } = this.state;
+    const { pokemonData, isLoading } = this.props.pokemonItemStore!;
 
     return (
       <>
         <CustomModal
-          header={`#${pokemonData.num} ${pokemonData.name}`}
-          body={<PokemonModalBody pokemon={pokemonData} />}
+          header={!isLoading ? `#${pokemonData.num} ${pokemonData.name}` : ''}
+          body={
+            isLoading ? <div className="d-flex justify-content-center"><LoadingSpinner/></div> : <PokemonModalBody pokemon={pokemonData}
+          />}
           isPokemonModalOpen={isPokemonModalOpen}
           toggle={this.togglePokemonModal}
         />
         <Row>
           {pokemons.map(pokemon  => (
-            <Col sm="6" md="4" lg="3" className="mb-4" key={pokemon.id}>
-              <Card className="card pokemon-item" onClick={() => { this.togglePokemonModal(); this.setState({ pokemonData: pokemon }); }}>
-                <CardImg
-                  className="pokemon-image align-self-center"
-                  src={pokemon.img}
-                  alt="pokemon"
-                />
-                <CardBody>
-                  <CardTitle className="text-center text-truncate">
-                    <h5>{`#${pokemon.num} ${pokemon.name}`}</h5>
-                  </CardTitle>
-                  <ul className="list-unstyled d-flex justify-content-center">
-                    {pokemon.type!.map((el: TypeBadge, i: number) => (
-                      <PokemonType key={i} type={el} />
-                    ))}
-                  </ul>
-                </CardBody>
-              </Card>
-            </Col>
+            <PokemonItem
+              key={pokemon.id}
+              pokemon={pokemon}
+              toggleModalFn={this.togglePokemonModal}
+              onClickFn={this.getPokemonOnClick}
+            />
           ))}
         </Row>
       </>
@@ -75,4 +71,4 @@ class PokemonsList extends Component<IProps, IState> {
   }
 }
 
-export default inject('appStore')(observer(PokemonsList));
+export default inject('appStore', 'pokemonItemStore')(observer(PokemonsList));

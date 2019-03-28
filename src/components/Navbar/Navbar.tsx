@@ -19,11 +19,9 @@ class NavBar extends Component<IProps, IState> {
     isOpen: false
   };
 
-  toggleNavbar = (): void => {
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
-  }
+  toggleNavbar = () => this.setState(
+    prevState => ({ isOpen: !prevState.isOpen })
+  );
 
   render() {
     return (

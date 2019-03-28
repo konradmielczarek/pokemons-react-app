@@ -21,22 +21,21 @@ interface IProps {
   appStore?: IAppStore;
 }
 
-class App extends Component<IProps, {}> {
+class App extends Component<IProps> {
   async componentDidMount() {
     const { appStore } = this.props;
 
     await appStore!.getPokemons(appStore!.limit, 1);
   }
 
-  handleSearch = (e: React.ChangeEvent<HTMLInputElement>): void => {
+  handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { appStore } = this.props;
     const text: string = e.target.value;
 
     appStore!.setSearchText(text);
-    appStore!.setCurrentPage(1);
   };
 
-  handlePageChange = (e: React.MouseEvent<HTMLElement>): void => {
+  handlePageChange = (e: React.MouseEvent<HTMLElement>) => {
     const { appStore } = this.props;
     const page: number = parseInt(e.currentTarget.dataset.page!);
 
@@ -45,10 +44,9 @@ class App extends Component<IProps, {}> {
   };
 
   render() {
-    const { appStore } = this.props;
+    const { isError, isLoading, totalCount, limit, currentPage } = this.props.appStore!;
 
-    if (appStore!.isError) {
-      console.log('error');
+    if (isError) {
       return (
         <Container className="mt-5">
           <Error />
@@ -61,22 +59,22 @@ class App extends Component<IProps, {}> {
         <Navbar handleSearchFn={this.handleSearch} />
         <Container className="mt-5">
           <ActionBar />
-          {appStore!.isLoading ? (
+          {isLoading ? (
             <div className="main-spinner-wrapper">
               <LoadingSpinner />
             </div>
           ) : (
               <>
-                {!appStore!.totalCount ? (
+                {!totalCount ? (
                   <p>No results</p>
                 ) : (
                     <PokemonsList />
                   )}
-                {appStore!.totalCount > 0 && (
+                {totalCount > 0 && (
                   <Pagination
-                    totalCount={appStore!.totalCount}
-                    limit={appStore!.limit}
-                    currentPage={appStore!.currentPage}
+                    totalCount={totalCount}
+                    limit={limit}
+                    currentPage={currentPage}
                     handleClickFn={this.handlePageChange}
                   />
                 )}

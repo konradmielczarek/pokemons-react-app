@@ -27,11 +27,11 @@ class Dropdown extends Component<IProps, IState> {
     isOpen: false
   };
 
-  toggle = (): void => {
-    this.setState({ isOpen: !this.state.isOpen });
-  };
+  toggle = () => this.setState(
+    prevState => ({ isOpen: !prevState.isOpen })
+  );
 
-  onClickOption = (e: React.MouseEvent<HTMLElement>): void => {
+  onClickOption = (e: React.MouseEvent<HTMLElement>) => {
     const value: string = e.currentTarget.dataset.value!;
 
     this.props.appStore!.setOrderBy(value);
